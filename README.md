@@ -52,7 +52,7 @@ Exibir histórico de dados
 
 ## 📸 Screenshot
 
-🔁 ![Screenshot do portfólio](images/dashboard.jpg)
+🔁 ![Screenshot do portfólio](./dashboard.png)
 
 
 ## 👩‍💻 Desenvolvedora
