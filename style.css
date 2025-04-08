@@ -1,0 +1,76 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background-color: #4caf50;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* script.js */
+const createChart = (ctx, label, borderColor) => {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Array(10).fill(''),
+      datasets: [{
+        label: label,
+        data: Array(10).fill(0),
+        borderColor: borderColor,
+        borderWidth: 2,
+        fill: false,
+      }]
+    },
+    options: {
+      animation: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+};
+
+const cpuChart = createChart(document.getElementById('cpuChart'), 'CPU', '#ff6384');
+const memChart = createChart(document.getElementById('memChart'), 'Memória', '#36a2eb');
+const diskChart = createChart(document.getElementById('diskChart'), 'Disco', '#ffce56');
+
+const updateData = (chart) => {
+  const newValue = Math.floor(Math.random() * 100);
+  chart.data.datasets[0].data.shift();
+  chart.data.datasets[0].data.push(newValue);
+  chart.update();
+};
+
+setInterval(() => {
+  updateData(cpuChart);
+  updateData(memChart);
+  updateData(diskChart);
+}, 2000);
